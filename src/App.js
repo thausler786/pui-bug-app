@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Modal} from 'pivotal-ui/react/modal';
 import {Input} from 'pivotal-ui/react/inputs';
 import {DefaultButton} from 'pivotal-ui/react/buttons';
+import {CheckboxDropdown} from 'pivotal-ui/react/checkbox-dropdown';
 
 export default class MyModal extends React.Component {
   constructor(props) {
@@ -13,6 +14,9 @@ export default class MyModal extends React.Component {
   render() {
     return (
       <div>
+        <CheckboxDropdown {...{
+          labels: ['DEBUG', 'WARNING', 'ERROR']
+        }} />
         <DefaultButton onClick={() => this.setState({show: true})}>
           Open Modal
         </DefaultButton>
