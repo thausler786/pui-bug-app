@@ -1,28 +1,32 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {Modal} from 'pivotal-ui/react/modal';
+import {Input} from 'pivotal-ui/react/inputs';
+import {DefaultButton} from 'pivotal-ui/react/buttons';
 
-class App extends Component {
+export default class MyModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {show: false, disableAnimation: false};
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <DefaultButton onClick={() => this.setState({show: true})}>
+          Open Modal
+        </DefaultButton>
+        <Modal animationDuration={this.state.disableAnimation ? 0 : undefined}
+               title='What a Header!'
+               size="30%"
+               show={this.state.show}
+               onHide={() => this.setState({show: false})}
+               footer={<DefaultButton onClick={() => this.setState({show: false})}>Close</DefaultButton>}>
+          <p>Text in a body</p><Input autoFocus placeholder="Tell me your darkest secrets"/>
+        </Modal>
       </div>
     );
   }
 }
 
-export default App;
+ReactDOM.render(<MyModal />, document.getElementById('root'));
